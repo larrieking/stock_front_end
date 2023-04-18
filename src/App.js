@@ -9,11 +9,16 @@ export default function App() {
 
 
       const response = await fetch(
-          'http://localhost:8081/api/stocks', {method: 'get', mode: 'no-cors', headers: {     "Content-Type": "application/json"   }});
+          'http://localhost:8081/api/stocks', {method: 'GET', mode: 'cors', credentials: "same-origin", // include, *same-origin, omit
+            headers: {
+              "Content-Type": "application/json",
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },});
       const data = await response.json();
+      console.log(data.data.content.slice( 0,100));
 
       //use only 100 sample data
-      setStocks( data.slice( 0,100) )
+      setStocks( data.data.content.slice( 0,100) )
 
     }
 
